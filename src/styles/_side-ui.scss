@@ -1,0 +1,94 @@
+@use 'tokens' as *;
+
+// "Follow us" on the left and the section slider on the right.
+// Fixed on wide screens so they work as page navigation; hidden where they would overlap content.
+
+.social,
+.progress {
+  position: fixed;
+  top: 326px;
+  z-index: 20;
+  font-size: 18px;
+  text-shadow: 0 0 24px rgba(0, 0, 0, 0.35);
+}
+
+.social {
+  left: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 24px;
+
+  &__label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    margin-bottom: 0;
+    padding-top: 33px;
+    white-space: nowrap;
+  }
+
+  &__link {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    transition:
+      color 0.2s,
+      transform 0.2s;
+
+    &:hover {
+      color: $c-accent;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.progress {
+  right: 80px;
+  display: flex;
+  gap: 32px;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-block: 16px;
+    height: 240px;
+  }
+
+  &__link {
+    opacity: 0.6;
+    transition: opacity 0.3s;
+
+    &:hover,
+    &.is-active {
+      opacity: 1;
+    }
+  }
+
+  &__track {
+    position: relative;
+    width: 3px;
+    height: 240px;
+    background: rgba($c-white, 0.5);
+  }
+
+  &__thumb {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 60px;
+    background: $c-white;
+    transform: translateY(calc(var(--step, 0) * 60px));
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+}
+
+// hidden below 1500px, where they would overlap the content
+@include down($bp-xl) {
+  .social,
+  .progress {
+    display: none;
+  }
+}

@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MNTN — A Hiking Guide</title>
+    <meta
+      name="description"
+      content="Be prepared for the mountains and beyond: a hiking guide about hiker levels, essential gear and reading your map."
+    />
+    <meta name="theme-color" content="#0b1d26" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Urbanist:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preload" as="image" href="/images/hero-bg.webp" />
+    <link rel="preload" as="image" href="/images/hero-mid.webp" />
+    <link rel="preload" as="image" href="/images/hero-front.webp" />
+
+    <script>
+      document.documentElement.classList.add('js');
+    </script>
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- ============ HEADER ============ -->
+    <header class="header">
+      <div class="header__inner">
+        <a class="logo" href="#top" aria-label="MNTN — home">MNTN</a>
+
+        <nav class="nav" id="site-nav" aria-label="Main">
+          <ul class="nav__list">
+            <li><a class="nav__link" href="#equipment">Equipment</a></li>
+            <li><a class="nav__link" href="#about">About us</a></li>
+            <li><a class="nav__link" href="#guide">Blog</a></li>
+          </ul>
+        </nav>
+
+        <a class="account" href="#account">
+          <svg class="account__icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              fill-rule="evenodd"
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2ZM7.07 18.28c.43-.9 3.05-1.78 4.93-1.78s4.51.88 4.93 1.78A7.9 7.9 0 0 1 12 20a7.9 7.9 0 0 1-4.93-1.72Zm11.29-1.45c-1.43-1.74-4.9-2.33-6.36-2.33s-4.93.59-6.36 2.33A7.95 7.95 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 1.82-.62 3.49-1.64 4.83ZM12 6a3.49 3.49 0 0 0-3.5 3.5C8.5 11.44 10.06 13 12 13s3.5-1.56 3.5-3.5S13.94 6 12 6Zm0 5c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11Z"
+            />
+          </svg>
+          <span>Account</span>
+        </a>
+
+        <button
+          class="burger"
+          type="button"
+          aria-controls="site-nav"
+          aria-expanded="false"
+          aria-label="Open menu"
+        >
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============ FIXED SIDE UI ============ -->
+    <aside class="social" aria-label="Follow us">
+      <span class="social__label">Follow us</span>
+      <a class="social__link" href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6Zm9.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"
+          />
+        </svg>
+      </a>
+      <a class="social__link" href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter">
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M22.46 6.01c-.77.35-1.6.58-2.47.68a4.3 4.3 0 0 0 1.89-2.37c-.83.49-1.75.85-2.73 1.04a4.29 4.29 0 0 0-7.31 3.91A12.18 12.18 0 0 1 3 4.79a4.29 4.29 0 0 0 1.33 5.73 4.27 4.27 0 0 1-1.94-.54v.05a4.29 4.29 0 0 0 3.44 4.21 4.3 4.3 0 0 1-1.94.07 4.3 4.3 0 0 0 4.01 2.98 8.6 8.6 0 0 1-6.35 1.78A12.14 12.14 0 0 0 8.12 21c7.9 0 12.21-6.54 12.21-12.21l-.01-.56a8.7 8.7 0 0 0 2.14-2.22Z"
+          />
+        </svg>
+      </a>
+    </aside>
+
+    <nav class="progress" aria-label="Page sections">
+      <ol class="progress__list">
+        <li><a class="progress__link is-active" href="#top" data-section="top">Start</a></li>
+        <li><a class="progress__link" href="#guide" data-section="guide">01</a></li>
+        <li><a class="progress__link" href="#equipment" data-section="equipment">02</a></li>
+        <li><a class="progress__link" href="#map" data-section="map">03</a></li>
+      </ol>
+      <span class="progress__track" aria-hidden="true"><span class="progress__thumb"></span></span>
+    </nav>
+
+    <main id="main">
+      <!-- ============ HERO ============ -->
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <img
+          class="hero__layer hero__layer--bg"
+          src="/images/hero-bg.webp"
+          alt=""
+          width="1920"
+          height="1113"
+          data-parallax="0.45"
+        />
+        <div class="hero__shade hero__shade--top" aria-hidden="true"></div>
+
+        <div class="hero__content" data-parallax="0.3" data-fade>
+          <p class="tagline">A Hiking guide</p>
+          <h1 class="hero__title" id="hero-title">Be prepared for the Mountains and beyond!</h1>
+          <a class="hero__scroll" href="#guide">
+            scroll down
+            <svg width="16" height="24" viewBox="0 0 16 24" aria-hidden="true">
+              <path fill="currentColor" d="M16 16l-1.41-1.41L9 20.17V0H7v20.17l-5.58-5.59L0 16l8 8 8-8Z" />
+            </svg>
+          </a>
+        </div>
+
+        <img
+          class="hero__layer hero__layer--mid"
+          src="/images/hero-mid.webp"
+          alt=""
+          width="1920"
+          height="1422"
+          data-parallax="0.15"
+        />
+        <img
+          class="hero__layer hero__layer--front"
+          src="/images/hero-front.webp"
+          alt=""
+          width="1920"
+          height="926"
+        />
+        <div class="hero__shade hero__shade--bottom" aria-hidden="true"></div>
+      </section>
+
+      <!-- ============ ARTICLES ============ -->
+      <div class="articles container">
+        <article class="feature" id="guide" aria-labelledby="guide-title">
+          <div class="feature__body">
+            <span class="feature__num" aria-hidden="true">01</span>
+            <p class="tagline tagline--section reveal">Get Started</p>
+            <h2 class="feature__title reveal" id="guide-title">What level of hiker are you?</h2>
+            <p class="feature__text reveal">
+              Determining what level of hiker you are can be an important tool when planning future hikes. This
+              hiking level guide will help you plan hikes according to different hike ratings set by various
+              websites like All Trails and Modern Hiker. What type of hiker are you – novice, moderate, advanced
+              moderate, expert, or expert backpacker?
+            </p>
+            <a class="more reveal" href="#guide">
+              read more
+              <svg width="24" height="16" viewBox="0 0 24 16" aria-hidden="true">
+                <path fill="currentColor" d="M16 0l-1.41 1.41L20.17 7H0v2h20.17l-5.59 5.58L16 16l8-8-8-8Z" />
+              </svg>
+            </a>
+          </div>
+          <figure class="feature__media reveal reveal--media">
+            <img
+              src="/images/section-01-566.webp"
+              srcset="/images/section-01-566.webp 566w, /images/section-01.webp 1132w"
+              sizes="(min-width: 1024px) 30vw, 100vw"
+              alt="A hiker walking along a grassy mountain ridge above a lake"
+              width="566"
+              height="720"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </article>
+
+        <article class="feature feature--reverse" id="equipment" aria-labelledby="equipment-title">
+          <div class="feature__body">
+            <span class="feature__num" aria-hidden="true">02</span>
+            <p class="tagline tagline--section reveal">Hiking Essentials</p>
+            <h2 class="feature__title reveal" id="equipment-title">Picking the right Hiking Gear!</h2>
+            <p class="feature__text reveal">
+              The nice thing about beginning hiking is that you don’t really need any special gear, you can
+              probably get away with things you already have.
+            </p>
+            <p class="feature__text reveal">
+              Let’s start with clothing. A typical mistake hiking beginners make is wearing jeans and regular
+              clothes, which will get heavy and chafe if they get sweaty or wet.
+            </p>
+            <a class="more reveal" href="#equipment">
+              read more
+              <svg width="24" height="16" viewBox="0 0 24 16" aria-hidden="true">
+                <path fill="currentColor" d="M16 0l-1.41 1.41L20.17 7H0v2h20.17l-5.59 5.58L16 16l8-8-8-8Z" />
+              </svg>
+            </a>
+          </div>
+          <figure class="feature__media reveal reveal--media">
+            <img
+              src="/images/section-02-566.webp"
+              srcset="/images/section-02-566.webp 566w, /images/section-02.webp 1132w"
+              sizes="(min-width: 1024px) 30vw, 100vw"
+              alt="A hiker with a backpack standing on a rocky peak above the clouds"
+              width="566"
+              height="720"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </article>
+
+        <article class="feature" id="map" aria-labelledby="map-title">
+          <div class="feature__body">
+            <span class="feature__num" aria-hidden="true">03</span>
+            <p class="tagline tagline--section reveal">Where you go is the key</p>
+            <h2 class="feature__title reveal" id="map-title">Understand Your Map &amp; Timing</h2>
+            <p class="feature__text reveal">
+              To start, print out the hiking guide and map. If it’s raining, throw them in a Zip-Lock bag. Read
+              over the guide, study the map, and have a good idea of what to expect. I like to know what my next
+              landmark is as I hike. For example, I’ll read the guide and know that say, in a mile, I make a right
+              turn at the junction..
+            </p>
+            <a class="more reveal" href="#map">
+              read more
+              <svg width="24" height="16" viewBox="0 0 24 16" aria-hidden="true">
+                <path fill="currentColor" d="M16 0l-1.41 1.41L20.17 7H0v2h20.17l-5.59 5.58L16 16l8-8-8-8Z" />
+              </svg>
+            </a>
+          </div>
+          <figure class="feature__media reveal reveal--media">
+            <img
+              src="/images/section-03-566.webp"
+              srcset="/images/section-03-566.webp 566w, /images/section-03.webp 1132w"
+              sizes="(min-width: 1024px) 30vw, 100vw"
+              alt="A hand holding a compass on a mountain trail"
+              width="566"
+              height="720"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </article>
+      </div>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer container" id="about">
+      <div class="footer__brand">
+        <div>
+          <a class="logo" href="#top" aria-label="MNTN — back to top">MNTN</a>
+          <p class="footer__claim">Get out there &amp; discover your next slope, mountain &amp; destination!</p>
+        </div>
+        <p class="footer__copy">
+          Copyright 2023 MNTN, Inc. Terms &amp; Privacy<br />
+          <span class="footer__credit">
+            Design by
+            <a href="https://www.figma.com/community/file/788675347108478517/mntn-landing-page" target="_blank" rel="noopener">Kryston Schwarze</a>
+            (CC BY 4.0)
+          </span>
+        </p>
+      </div>
+
+      <div class="footer__links">
+        <nav aria-labelledby="footer-blog">
+          <h2 class="footer__heading" id="footer-blog">More on The Blog</h2>
+          <ul class="footer__list">
+            <li><a href="#about">About MNTN</a></li>
+            <li><a href="#about">Contributors &amp; Writers</a></li>
+            <li><a href="#about">Write For Us</a></li>
+            <li><a href="#about">Contact Us</a></li>
+            <li><a href="#about">Privacy Policy</a></li>
+          </ul>
+        </nav>
+        <nav aria-labelledby="footer-mntn">
+          <h2 class="footer__heading" id="footer-mntn">More on MNTN</h2>
+          <ul class="footer__list">
+            <li><a href="#about">The Team</a></li>
+            <li><a href="#about">Jobs</a></li>
+            <li><a href="#about">Press</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,134 @@
+@use 'tokens' as *;
+
+// The hero is a "stage" that mirrors the 1920px artboard.
+// Every layer is positioned in units of the stage width, so the composition keeps its proportions.
+// On phones the stage is wider than the screen and anchored to the bottom of the hero.
+
+.hero {
+  --stage-w: 100vw;
+  --hero-h: calc(var(--stage-w) * 0.75); // 1440 / 1920
+  --stage-top: 0px;
+
+  position: relative;
+  height: var(--hero-h);
+  overflow-x: clip; // layers are wider than the screen on phones; vertical overflow stays visible
+  min-height: 640px;
+
+  @include down($bp-lg) {
+    --stage-w: 160vw;
+    --hero-h: max(100svh, 700px);
+    --stage-top: calc(var(--hero-h) - var(--stage-w) * 0.75);
+  }
+
+  @include down($bp-sm) {
+    --stage-w: 240vw;
+  }
+
+  &__layer {
+    position: absolute;
+    left: calc(50% - var(--stage-w) / 2);
+    width: var(--stage-w);
+    max-width: none;
+    pointer-events: none;
+    user-select: none;
+    will-change: transform;
+
+    &--bg {
+      z-index: 1;
+      top: 0;
+      // stretches up to the top edge when the stage is pushed down on small screens
+      height: calc(var(--stage-top) + var(--stage-w) * 0.5797); // 1113 / 1920
+      object-fit: cover;
+      object-position: 50% 100%;
+    }
+
+    &--mid {
+      z-index: 4;
+      top: calc(var(--stage-top) + var(--stage-w) * 0.2417); // 464 / 1920
+    }
+
+    &--front {
+      z-index: 5;
+      top: calc(var(--stage-top) + var(--stage-w) * 0.4); // 768 / 1920
+    }
+  }
+
+  &__shade {
+    position: absolute;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+
+    // Figma "BG Hero": darkens the sky towards the top-left
+    &--top {
+      z-index: 2;
+      top: 0;
+      height: calc(var(--stage-top) + var(--stage-w) * 0.625); // 1200 / 1920
+      background: linear-gradient(340deg, rgba($c-bg, 0) 31%, rgba($c-bg, 0.88) 100%);
+    }
+
+    // Figma "BG Content": fades the mountains into the page background
+    &--bottom {
+      z-index: 6;
+      top: calc(var(--stage-top) + var(--stage-w) * 0.625);
+      height: calc(var(--stage-w) * 0.3646 + 60vw); // 700 / 1920 + extra for the parallax travel
+      background: linear-gradient(
+        to bottom,
+        rgba($c-bg, 0) 0,
+        $c-bg calc(var(--stage-w) * 0.2224) // opaque at 61% of 700px
+      );
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    max-width: calc(1080px + var(--hero-x) + var(--gutter)); // Figma: 950px (Playfair runs wider than Chronicle)
+    padding-top: fluid(150, 287);
+    padding-inline: var(--hero-x) var(--gutter);
+
+    --hero-x: #{fluid(20, 500)};
+
+    @include down($bp-lg) {
+      --hero-x: var(--gutter);
+      padding-top: 150px;
+    }
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: fluid(42, 88);
+    line-height: 1.136; // 100 / 88
+    text-transform: capitalize;
+    text-wrap: balance;
+  }
+
+  &__scroll {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 18px;
+
+    svg {
+      @include motion {
+        animation: nudge 2s ease-in-out infinite;
+      }
+    }
+  }
+}
+
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}

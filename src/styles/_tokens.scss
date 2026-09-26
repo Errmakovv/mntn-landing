@@ -1,0 +1,45 @@
+@use 'sass:math';
+
+// ---------- Colors (from the Figma color styles) ----------
+$c-bg: #0b1d26; // "BG"
+$c-white: #ffffff; // "Weiß"
+$c-accent: #fbd784; // "Accent"
+
+// ---------- Typography ----------
+// Original design uses Chronicle Display + Gilroy (commercial fonts).
+// Free substitutes from Google Fonts with a similar feel:
+$font-display: 'Playfair Display', 'Times New Roman', serif;
+$font-body: 'Urbanist', 'Helvetica Neue', Arial, sans-serif;
+
+// ---------- Layout ----------
+$design-width: 1920; // artboard width in Figma
+$container: 1462px; // content width in Figma (x: 229 → 1691)
+
+$bp-sm: 600px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1500px; // wide enough for the fixed side UI
+
+// Fluid value: equals $max at the 1920 artboard, scales with the viewport, never below $min.
+@function fluid($min, $max) {
+  $vw: math.div($max, $design-width) * 100vw;
+  @return clamp(#{$min}px, #{$vw}, #{$max}px);
+}
+
+@mixin up($bp) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
+
+@mixin down($bp) {
+  @media (max-width: ($bp - 0.02px)) {
+    @content;
+  }
+}
+
+@mixin motion {
+  @media (prefers-reduced-motion: no-preference) {
+    @content;
+  }
+}

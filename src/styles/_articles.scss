@@ -1,0 +1,144 @@
+@use 'tokens' as *;
+
+.articles {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: fluid(100, 200);
+}
+
+// One article: [text block][image], or mirrored with --reverse.
+// Figma: image 566, gap 114, text inset 150 (the big number sits in that inset).
+.feature {
+  --media-w: #{fluid(300, 566)};
+  --gap: #{fluid(48, 114)};
+  --inset: #{fluid(72, 150)};
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--media-w);
+  column-gap: var(--gap);
+  align-items: start;
+  scroll-margin-top: 80px;
+
+  &--reverse {
+    grid-template-columns: var(--media-w) minmax(0, 1fr);
+
+    .feature__media {
+      order: -1;
+    }
+  }
+
+  &__body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 27px;
+    max-width: calc(632px + var(--inset));
+    padding-top: fluid(60, 141);
+    padding-left: var(--inset);
+  }
+
+  &__num {
+    position: absolute;
+    top: fluid(10, 38);
+    left: 0;
+    z-index: -1;
+    font-weight: 700;
+    font-size: fluid(120, 240);
+    line-height: 1;
+    color: rgba($c-white, 0.1);
+    user-select: none;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: fluid(34, 64);
+    line-height: 1.2;
+    max-width: 555px;
+    text-wrap: balance;
+  }
+
+  &__text {
+    font-size: fluid(16, 18);
+    line-height: 1.78; // 32 / 18
+  }
+
+  &__media {
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      aspect-ratio: 566 / 720;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    &:hover img {
+      transform: scale(1.04);
+    }
+  }
+
+  // Tablet & phone: image on top, text below
+  @include down($bp-lg) {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+
+    &--reverse {
+      grid-template-columns: 1fr;
+    }
+
+    &__media {
+      order: -1;
+
+      img {
+        aspect-ratio: 4 / 3;
+      }
+    }
+
+    &__body {
+      padding-top: 40px;
+      padding-left: 0;
+      max-width: 680px;
+    }
+
+    &__num {
+      top: -20px;
+      left: auto;
+      right: 0;
+    }
+  }
+}
+
+// ---------- Scroll reveal (only when JS is on) ----------
+.js .reveal {
+  @include motion {
+    opacity: 0;
+    transform: translateY(40px);
+    transition:
+      opacity 0.9s ease,
+      transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: calc(var(--i, 0) * 90ms);
+
+    &.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+.js .reveal--media {
+  @include motion {
+    transform: none;
+    clip-path: inset(12% 0 0 0);
+    transition:
+      opacity 1s ease,
+      clip-path 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+
+    &.is-visible {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+}

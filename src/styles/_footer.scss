@@ -1,0 +1,102 @@
+@use 'tokens' as *;
+
+.footer {
+  --media-w: #{fluid(300, 566)};
+  --gap: #{fluid(48, 114)};
+
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--media-w);
+  column-gap: var(--gap);
+  padding-top: fluid(100, 200);
+  padding-bottom: fluid(48, 120);
+
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 48px;
+  }
+
+  &__claim {
+    max-width: 303px;
+    margin-top: 24px;
+    line-height: 1.78;
+  }
+
+  &__copy {
+    line-height: 1.78;
+    color: rgba($c-white, 0.5);
+  }
+
+  &__credit {
+    font-size: 14px;
+    font-weight: 500;
+
+    a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+
+      &:hover {
+        color: $c-accent;
+      }
+    }
+  }
+
+  &__links {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  &__heading {
+    color: $c-accent;
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: fluid(20, 24);
+    line-height: 1.33;
+    margin-bottom: 24px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-weight: 500;
+    line-height: 1.78;
+
+    a {
+      transition: color 0.2s;
+
+      &:hover {
+        color: $c-accent;
+      }
+    }
+  }
+
+  @include down($bp-lg) {
+    grid-template-columns: 1fr;
+    row-gap: 56px;
+
+    &__brand {
+      display: contents;
+    }
+
+    &__copy {
+      order: 3;
+    }
+
+    &__links {
+      justify-content: flex-start;
+      gap: 80px;
+    }
+  }
+
+  @include down($bp-sm) {
+    &__links {
+      flex-direction: column;
+      gap: 40px;
+    }
+  }
+}

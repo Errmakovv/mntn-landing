@@ -1,0 +1,154 @@
+@use 'tokens' as *;
+
+.header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 30;
+  padding-top: fluid(24, 64);
+
+  &__inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: var(--gutter);
+  }
+
+  .logo {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.nav {
+  &__list {
+    display: flex;
+    gap: 40px;
+  }
+
+  &__link {
+    position: relative;
+    font-size: 18px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -6px;
+      height: 2px;
+      background: $c-accent;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+
+  // Desktop: centered in the header
+  @include up($bp-md) {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  // Mobile: full-screen overlay
+  @include down($bp-md) {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    background: rgba($c-bg, 0.97);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s;
+
+    &.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &__list {
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    &__link {
+      font-family: $font-display;
+      font-size: 36px;
+      font-weight: 600;
+    }
+  }
+}
+
+.account {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 17px;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $c-accent;
+  }
+
+  @include down($bp-md) {
+    display: none;
+  }
+}
+
+.burger {
+  position: relative;
+  z-index: 2;
+  display: none;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+
+  &__line {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    height: 2px;
+    background: $c-white;
+    transition:
+      transform 0.3s ease,
+      top 0.3s ease;
+
+    &:first-child {
+      top: 17px;
+    }
+
+    &:last-child {
+      top: 25px;
+    }
+  }
+
+  &[aria-expanded='true'] &__line {
+    top: 21px;
+
+    &:first-child {
+      transform: rotate(45deg);
+    }
+
+    &:last-child {
+      transform: rotate(-45deg);
+    }
+  }
+
+  @include down($bp-md) {
+    display: block;
+  }
+}
