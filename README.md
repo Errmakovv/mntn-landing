@@ -1,5 +1,7 @@
 # MNTN — Hiking Guide Landing Page
 
+**Live demo: https://mntn-landing-eight.vercel.app**
+
 A pixel-careful implementation of the **MNTN** landing page design from Figma, built without a UI framework:
 semantic HTML, SCSS and a small amount of TypeScript.
 
